@@ -1,0 +1,247 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #0f2a44, #020617);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.tree {
+  position: fixed;
+  right: -20px;
+  bottom: 0;
+  width: 160px;
+  height: 260px;
+  background: linear-gradient(
+    to top,
+    transparent 0%,
+    #0f3d2e 30%,
+    #145a3a 60%,
+    #1b7a4a 100%
+  );
+  clip-path: polygon(
+    50% 0%,
+    65% 20%,
+    55% 20%,
+    75% 45%,
+    60% 45%,
+    85% 75%,
+    15% 75%,
+    40% 45%,
+    25% 45%,
+    45% 20%,
+    35% 20%
+  );
+  filter: drop-shadow(0 0 25px rgba(0,0,0,0.4));
+  opacity: 0.9;
+  z-index: 3;
+}
+
+
+@keyframes glow {
+  from {
+    opacity: 0.7;
+    text-shadow: 0 0 8px gold;
+  }
+  to {
+    opacity: 1;
+    text-shadow: 0 0 18px gold;
+  }
+}
+
+
+
+/* ❄️ СНЕГ */
+.snow {
+ position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snow-back::before,
+.snow-front::before {
+  content: "";
+ position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 10%, white 50%, transparent 51%),
+    radial-gradient(4px 5px at 30% 30%, white 50%, transparent 51%),
+    radial-gradient(2px 3px at 50% 50%, white 50%, transparent 51%),
+    radial-gradient(1px 1px at 70% 70%, white 50%, transparent 51%);
+  background-repeat: repeat;
+  animation: snow 50s linear infinite;
+  opacity: 0.25;
+}
+.snow-mid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 20%, white 50%, transparent 51%),
+    radial-gradient(2px 2px at 40% 40%, white 50%, transparent 51%),
+    radial-gradient(4px 2px at 60% 60%, white 50%, transparent 51%),
+    radial-gradient(2px 2px at 80% 80%, white 50%, transparent 51%);
+  background-repeat: repeat;
+  animation: snow 35s linear infinite;
+  opacity: 0.45;
+}  
+.snow-back::before {
+  animation: snow 40s linear infinite;
+  opacity: 0.3;
+}
+
+
+
+
+
+
+.snow-front::before {
+  animation: snow 20s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes snow {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+/* 🎶 ПЛЕЕР */
+.player {
+  width: 92%;
+  max-width: 420px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(14px);
+  border-radius: 26px;
+  padding: 1.8rem;
+  z-index: 10;
+  box-shadow: 0 0 40px rgba(0,0,0,0.4);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 1.2rem;
+}
+
+.now-playing {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  opacity: 0.95;
+}
+
+.controls {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.controls button {
+  flex: 1;
+  padding: 0.7rem;
+  border-radius: 16px;
+  font-size: 1.3rem;
+  border: none;
+  background: rgba(255,255,255,0.18);
+  color: white;
+  cursor: pointer;
+}
+
+.controls button:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+.playlist h2 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+#track-list {
+  list-style: none;
+  max-height: 120px;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+#track-list.show {
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+#track-list li {
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  border-radius: 12px;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+#track-list li:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+#track-list li.active {
+  background: rgba(255,255,255,0.35);
+  opacity: 1;
+}
+
+#toggle-list {
+  margin-top: 0.6rem;
+  width: 100%;
+  padding: 0.45rem;
+  border-radius: 12px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.tree-img {
+  position: fixed;
+  right: 70px;
+  bottom: 0;
+  height: 260px;
+  opacity: 0.95;
+  z-index: 2;
+  pointer-events: none;
+}
+  
+@media (max-width: 600px) {
+  .tree-img {
+    height: 140px;
+    right: 5px;
+    bottom: 0;
+    opacity: 0.9;
+  }
+}
+
+@keyframes snow {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100%); }
+}
+.tree-img {
+  z-index: 2;
+}
+.player {
+  z-index: 5;
+}
+
+.tree {
+  z-index: 1;
+} 
